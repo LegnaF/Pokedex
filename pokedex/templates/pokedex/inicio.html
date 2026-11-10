@@ -1,0 +1,54 @@
+{% extends 'pokedex/base.html' %}
+
+{% block title %}Inicio | Pokédex{% endblock %}
+
+{% block page_heading %}
+Inicio
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">Bienvenido a Pokédex</h1>
+
+<p class="page-description">
+    Explora el mundo Pokémon, administra entrenadores
+    y descubre todos los secretos de la región.
+</p>
+
+<div class="row g-4">
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card-custom">
+            <h6>Pokémon registrados</h6>
+            <h2>10326</h2>
+            <p>Especies del Mundo</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card-custom">
+            <h6>Entrenadores</h6>
+            <h2>2</h2>
+            <p>Entrenadores registrados</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card-custom">
+            <h6>Gimnasios</h6>
+            <h2>16</h2>
+            <p>Gimnasios registrados</p>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card-custom">
+            <h6>Backup</h6>
+            <h2>0</h2>
+            <p>Pokémon almacenados</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

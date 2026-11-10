@@ -1,0 +1,119 @@
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Eliminar gimnasio | Pokédex{% endblock %}
+{% block page_heading %}Eliminar gimnasio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'eliminate/gimnasio.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="eliminar-gimnasio-container">
+
+    <!-- ENCABEZADO -->
+    <div class="eliminar-gimnasio-header">
+        <div>
+            <span class="eliminar-gimnasio-etiqueta">
+                POKÉDEX / GIMNASIOS
+            </span>
+
+            <h1>Eliminar gimnasio</h1>
+
+            <p>Confirma si deseas eliminar este gimnasio del registro.</p>
+        </div>
+
+        <div class="eliminar-gimnasio-icono">
+            <i class="bi bi-trash3-fill"></i>
+        </div>
+    </div>
+
+    <!-- TARJETA DE CONFIRMACIÓN -->
+    <div class="eliminar-gimnasio-card">
+
+        <div class="eliminar-gimnasio-alerta">
+            <div class="eliminar-gimnasio-alerta-icono">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+
+            <div>
+                <h2>¿Estás seguro?</h2>
+                <p>
+                    Esta acción eliminará permanentemente el gimnasio
+                    seleccionado.
+                </p>
+            </div>
+        </div>
+
+        <!-- INFORMACIÓN DEL GIMNASIO -->
+        <div class="eliminar-gimnasio-info">
+
+            <div class="eliminar-gimnasio-avatar">
+                <i class="bi bi-building-fill"></i>
+            </div>
+
+            <div class="eliminar-gimnasio-datos">
+                <span>GIMNASIO SELECCIONADO</span>
+
+                <h3>{{ gimnasio.lider_gimnasio }}</h3>
+
+                <p>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    {{ gimnasio.ciudad }}, {{ gimnasio.region }}
+                </p>
+            </div>
+
+        </div>
+
+        <!-- DETALLES -->
+        <div class="eliminar-gimnasio-detalles">
+
+            <div class="eliminar-gimnasio-detalle">
+                <span>Tipo elemental</span>
+                <strong>{{ gimnasio.tipo_elemento }}</strong>
+            </div>
+
+            <div class="eliminar-gimnasio-detalle">
+                <span>Medalla</span>
+                <strong>{{ gimnasio.medalla }}</strong>
+            </div>
+
+            <div class="eliminar-gimnasio-detalle">
+                <span>Teléfono</span>
+                <strong>{{ gimnasio.telefono }}</strong>
+            </div>
+
+        </div>
+
+        <!-- ADVERTENCIA -->
+        <div class="eliminar-gimnasio-advertencia">
+            <i class="bi bi-info-circle-fill"></i>
+
+            <p>
+                Una vez eliminado, no podrás recuperar este registro.
+                Verifica que hayas seleccionado el gimnasio correcto.
+            </p>
+        </div>
+
+        <!-- BOTONES -->
+        <form method="POST" class="eliminar-gimnasio-acciones">
+            {% csrf_token %}
+
+            <a href="{% url 'gimnasios' %}" class="btn-gimnasio-cancelar">
+                <i class="bi bi-arrow-left"></i>
+                Cancelar
+            </a>
+
+            <button type="submit" class="btn-gimnasio-eliminar">
+                <i class="bi bi-trash3-fill"></i>
+                Sí, eliminar gimnasio
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

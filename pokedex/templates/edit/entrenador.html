@@ -1,0 +1,564 @@
+
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Editar entrenador | Pokédex{% endblock %}
+{% block page_heading %}Editar entrenador{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'edit/entrenador.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="editar-entrenador-page">
+
+    <!-- ENCABEZADO -->
+    <div class="editar-header">
+
+        <div>
+            <span class="section-tag">
+                GESTIÓN DE ENTRENADORES
+            </span>
+
+            <h1>Editar entrenador</h1>
+
+            <p>
+                Actualiza la información y el equipo Pokémon del entrenador.
+            </p>
+        </div>
+
+        <div class="editar-icon">
+            <i class="bi bi-person-gear"></i>
+        </div>
+
+    </div>
+
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="editar-form"
+          id="form-editar-entrenador">
+
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+
+        <!-- =====================================
+             INFORMACIÓN PERSONAL
+        ====================================== -->
+
+        <section class="form-section">
+
+            <div class="form-section-title">
+
+                <i class="bi bi-person-vcard-fill"></i>
+
+                <div>
+                    <h2>Información personal</h2>
+                    <p>Datos principales del entrenador.</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+                {% for field in form %}
+
+                    {% if field.name != 'pokemon' %}
+
+                        <div class="form-group">
+
+                            <label for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.errors %}
+                                <div class="field-error">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             EQUIPO POKÉMON
+        ====================================== -->
+
+        <section class="form-section pokemon-section">
+
+            <div class="form-section-title">
+
+                <i class="bi bi-pokeball"></i>
+
+                <div>
+                    <h2>Equipo Pokémon</h2>
+                    <p>
+                        Busca Pokémon por su nombre y administra el equipo del entrenador.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- BUSCADOR POKÉAPI -->
+
+            <div class="pokemon-search-container">
+
+                <label for="buscar-pokemon">
+                    Buscar Pokémon
+                </label>
+
+                <div class="pokemon-search-box">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="text"
+                        id="buscar-pokemon"
+                        placeholder="Ejemplo: Pikachu, Charizard, Lucario..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+                <p class="search-help">
+                    <i class="bi bi-info-circle"></i>
+                    Los Pokémon se consultan directamente desde PokéAPI.
+                </p>
+
+            </div>
+
+
+            <!-- RESULTADOS DE BÚSQUEDA -->
+
+            <div id="resultados-pokemon" class="resultados-pokemon">
+
+                <div class="pokemon-search-empty">
+
+                    <i class="bi bi-search"></i>
+
+                    <p>
+                        Escribe el nombre de un Pokémon para buscarlo.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- EQUIPO ACTUAL Y SELECCIONADO -->
+
+            <div class="equipo-seleccionado-container">
+
+                <div class="equipo-titulo">
+
+                    <div>
+                        <h3>Equipo del entrenador</h3>
+                        <p>Pokémon que estarán registrados en su perfil.</p>
+                    </div>
+
+                    <span id="contador-pokemon">
+                        {{ pokemon_seleccionados.count }} Pokémon
+                    </span>
+
+                </div>
+
+
+                <div id="equipo-seleccionado" class="equipo-seleccionado">
+
+                    {% for pokemon in pokemon_seleccionados %}
+
+                        <div class="pokemon-team-card"
+                             data-api-id="{{ pokemon.id }}"
+                             data-db-id="{{ pokemon.id }}">
+
+                            <img
+                                src="{{ pokemon.imagen }}"
+                                alt="{{ pokemon.nombre }}"
+                                loading="lazy"
+                            >
+
+                            <h4>{{ pokemon.nombre|title }}</h4>
+
+                            <span class="pokemon-team-type">
+                                {{ pokemon.tipo1 }}
+                                {% if pokemon.tipo2 %}
+                                    / {{ pokemon.tipo2 }}
+                                {% endif %}
+                            </span>
+
+                            <button
+                                type="button"
+                                class="btn-quitar-pokemon"
+                                aria-label="Quitar {{ pokemon.nombre }}"
+                                title="Quitar Pokémon"
+                            >
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+
+                            <input
+                                type="hidden"
+                                name="pokemon"
+                                value="{{ pokemon.id }}"
+                            >
+
+                        </div>
+
+                    {% empty %}
+
+                        <p class="equipo-vacio">
+                            Todavía no hay Pokémon en este equipo.
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <p class="pokemon-help">
+
+                <i class="bi bi-shield-check"></i>
+
+                Debes seleccionar al menos un Pokémon para guardar los cambios.
+
+            </p>
+
+        </section>
+
+
+
+        <div class="form-actions">
+
+            <a href="{% url 'entrenadores' %}" class="btn-cancelar">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Cancelar
+
+            </a>
+
+
+            <button type="submit" class="btn-guardar">
+
+                <i class="bi bi-save-fill"></i>
+
+                Guardar cambios
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT - POKÉAPI
+====================================== -->
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const buscador = document.getElementById('buscar-pokemon');
+    const resultados = document.getElementById('resultados-pokemon');
+    const equipo = document.getElementById('equipo-seleccionado');
+    const contador = document.getElementById('contador-pokemon');
+    const formulario = document.getElementById('form-editar-entrenador');
+
+    let temporizador;
+    let busquedaActual = 0;
+
+
+
+    buscador.addEventListener('input', function () {
+
+        clearTimeout(temporizador);
+
+        const nombre = buscador.value.trim().toLowerCase();
+
+        if (!nombre) {
+
+            resultados.innerHTML = `
+                <div class="pokemon-search-empty">
+                    <i class="bi bi-search"></i>
+                    <p>Escribe el nombre de un Pokémon para buscarlo.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        resultados.innerHTML = `
+            <div class="pokemon-loading">
+                <div class="spinner-border text-danger"></div>
+                <p>Consultando PokéAPI...</p>
+            </div>
+        `;
+
+        temporizador = setTimeout(() => {
+            buscarPokemon(nombre);
+        }, 500);
+
+    });
+
+
+
+
+    async function buscarPokemon(nombre) {
+
+        const consulta = ++busquedaActual;
+
+        try {
+
+            const respuesta = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(nombre)}`
+            );
+
+            if (!respuesta.ok) {
+                throw new Error('Pokémon no encontrado');
+            }
+
+            const pokemon = await respuesta.json();
+
+            // Evitar mostrar resultados de búsquedas anteriores.
+            if (consulta !== busquedaActual) return;
+
+            mostrarResultado(pokemon);
+
+        } catch (error) {
+
+            if (consulta !== busquedaActual) return;
+
+            resultados.innerHTML = `
+                <div class="pokemon-no-encontrado">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <h4>Pokémon no encontrado</h4>
+                    <p>Comprueba el nombre e inténtalo nuevamente.</p>
+                </div>
+            `;
+
+        }
+
+    }
+
+
+
+    function mostrarResultado(pokemon) {
+
+        const nombre = pokemon.name;
+
+        const imagen =
+            pokemon.sprites.other['official-artwork'].front_default
+            || pokemon.sprites.front_default;
+
+        const tipos = pokemon.types
+            .map(tipo => tipo.type.name)
+            .join(' / ');
+
+        const yaExiste = equipo.querySelector(
+            `[data-api-id="${pokemon.id}"]`
+        );
+
+        resultados.innerHTML = `
+            <div class="pokemon-result-card">
+
+                <div class="pokemon-result-image">
+
+                    <img
+                        src="${imagen || ''}"
+                        alt="${nombre}"
+                    >
+
+                </div>
+
+                <div class="pokemon-result-info">
+
+                    <span>#${String(pokemon.id).padStart(3, '0')}</span>
+
+                    <h3>${nombre}</h3>
+
+                    <p>${tipos}</p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-agregar-pokemon"
+                    ${yaExiste ? 'disabled' : ''}
+                >
+
+                    <i class="bi ${yaExiste
+                        ? 'bi-check-circle-fill'
+                        : 'bi-plus-circle-fill'}"></i>
+
+                    ${yaExiste ? 'Agregado' : 'Agregar'}
+
+                </button>
+
+            </div>
+        `;
+
+
+        const boton = resultados.querySelector('.btn-agregar-pokemon');
+
+        boton.addEventListener('click', function () {
+
+            agregarPokemon(pokemon);
+
+            mostrarResultado(pokemon);
+
+        });
+
+    }
+
+
+    function agregarPokemon(pokemon) {
+
+        const yaExiste = equipo.querySelector(
+            `[data-api-id="${pokemon.id}"]`
+        );
+
+        if (yaExiste) return;
+
+        const imagen =
+            pokemon.sprites.other['official-artwork'].front_default
+            || pokemon.sprites.front_default;
+
+        const tipos = pokemon.types
+            .map(tipo => tipo.type.name);
+
+        const tarjeta = document.createElement('div');
+
+        tarjeta.className = 'pokemon-team-card';
+
+        tarjeta.dataset.apiId = pokemon.id;
+        tarjeta.dataset.nuevo = 'true';
+
+        tarjeta.innerHTML = `
+
+            <img
+                src="${imagen || ''}"
+                alt="${pokemon.name}"
+                loading="lazy"
+            >
+
+            <h4>${pokemon.name}</h4>
+
+            <span class="pokemon-team-type">
+                ${tipos.join(' / ')}
+            </span>
+
+            <button
+                type="button"
+                class="btn-quitar-pokemon"
+                aria-label="Quitar ${pokemon.name}"
+                title="Quitar Pokémon"
+            >
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <input
+                type="hidden"
+                name="pokemon_api"
+                value="${pokemon.id}"
+            >
+
+        `;
+
+        equipo.appendChild(tarjeta);
+
+        actualizarContador();
+
+    }
+
+
+
+    equipo.addEventListener('click', function (evento) {
+
+        const boton = evento.target.closest('.btn-quitar-pokemon');
+
+        if (!boton) return;
+
+        const tarjeta = boton.closest('.pokemon-team-card');
+
+        tarjeta.remove();
+
+        actualizarContador();
+
+    });
+
+
+
+    function actualizarContador() {
+
+        const cantidad = equipo.querySelectorAll(
+            '.pokemon-team-card'
+        ).length;
+
+        contador.textContent = `${cantidad} Pokémon`;
+
+        const mensajeVacio = equipo.querySelector('.equipo-vacio');
+
+        if (cantidad === 0 && !mensajeVacio) {
+
+            equipo.innerHTML = `
+                <p class="equipo-vacio">
+                    Todavía no hay Pokémon en este equipo.
+                </p>
+            `;
+
+        }
+
+    }
+
+
+    // =====================================
+    // VALIDAR EQUIPO ANTES DE GUARDAR
+    // =====================================
+
+    formulario.addEventListener('submit', function (evento) {
+
+        const cantidad = equipo.querySelectorAll(
+            '.pokemon-team-card'
+        ).length;
+
+        if (cantidad === 0) {
+
+            evento.preventDefault();
+
+            alert('Debes seleccionar al menos un Pokémon para el entrenador.');
+
+            return;
+
+        }
+
+    });
+
+
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,309 @@
+
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Entrenadores | Pokédex{% endblock %}
+{% block page_heading %}Entrenadores Pokémon{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pokedex/entrenadores.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="entrenadores-page">
+
+    <!-- Encabezado principal -->
+    <header class="trainer-hero">
+        <div class="hero-content">
+            <span class="section-tag">
+                <i class="bi bi-stars"></i> POKÉMON TRAINER DATABASE
+            </span>
+
+            <h1>Entrenadores</h1>
+
+            <p>
+                Descubre a los entrenadores, conoce sus logros
+                y explora los equipos Pokémon que los acompañan.
+            </p>
+
+            <a href="{% url 'registrar_entrenador' %}" class="btn-nuevo-entrenador">
+                <i class="bi bi-plus-circle-fill"></i>
+                Registrar entrenador
+            </a>
+        </div>
+
+        <div class="hero-decoration">
+            <i class="bi bi-person-badge-fill"></i>
+        </div>
+    </header>
+
+    <!-- Estadísticas -->
+    <section class="trainer-stats">
+
+        <div class="stat-card">
+            <div class="stat-icon icon-red">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div>
+                <span>Total de entrenadores</span>
+                <h2>{{ total_entrenadores }}</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon icon-blue">
+                <i class="bi bi-pokeball"></i>
+            </div>
+            <div>
+                <span>Comunidad</span>
+                <h2>Pokémon</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon icon-yellow">
+                <i class="bi bi-trophy-fill"></i>
+            </div>
+            <div>
+                <span>Entrenadores registrados</span>
+                <h2>{{ total_entrenadores }}</h2>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Buscador -->
+    <section class="trainer-toolbar">
+
+        <div class="toolbar-title">
+            <span class="section-tag">COMUNIDAD</span>
+            <h2>Explorar entrenadores</h2>
+            <p>Busca entrenadores por sus datos personales o lugar de origen.</p>
+        </div>
+
+        <form method="GET" class="trainer-search">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                name="buscar"
+                placeholder="Nombre, documento o pueblo..."
+                value="{{ buscar }}"
+            >
+
+            {% if buscar %}
+                <a href="{% url 'entrenadores' %}" class="clear-search"
+                   title="Limpiar búsqueda">
+                    <i class="bi bi-x-circle-fill"></i>
+                </a>
+            {% endif %}
+
+            <button type="submit">Buscar</button>
+
+        </form>
+
+    </section>
+
+    <!-- Resultados -->
+    <div class="results-heading">
+        <div>
+            <h3>Directorio de entrenadores</h3>
+            <p>Perfiles registrados en la Pokédex</p>
+        </div>
+
+        <span class="results-counter">
+            <i class="bi bi-person-check-fill"></i>
+            {{ total_entrenadores }} resultados
+        </span>
+    </div>
+
+    {% if entrenadores %}
+
+        <section class="trainers-grid">
+
+            {% for entrenador in entrenadores %}
+
+                <article class="trainer-card">
+
+                    <!-- Imagen y número -->
+                    <div class="trainer-card-top">
+
+                        <span class="trainer-number">
+                            ENTRENADOR #{{ forloop.counter }}
+                        </span>
+
+                        <div class="trainer-avatar">
+
+                            {% if entrenador.img %}
+                                <img
+                                    src="{{ entrenador.img }}"
+                                    alt="{{ entrenador.nombre }}"
+                                    loading="lazy"
+                                >
+                            {% else %}
+                                <i class="bi bi-person-fill"></i>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="trainer-name">
+                            <h3>
+                                {{ entrenador.nombre }}
+                                {{ entrenador.apellido }}
+                            </h3>
+
+                            <span>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                {{ entrenador.pueblo|default:"Pueblo desconocido" }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Información -->
+                    <div class="trainer-card-body">
+
+                        <div class="trainer-info-grid">
+
+                            <div class="trainer-info-item">
+                                <i class="bi bi-trophy-fill"></i>
+                                <div>
+                                    <small>Medallas</small>
+                                    <strong>{{ entrenador.medallas }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="trainer-info-item">
+                                <i class="bi bi-award-fill"></i>
+                                <div>
+                                    <small>Clasificación</small>
+                                    <strong>{{ entrenador.clasificacion|default:"Sin clasificación" }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="trainer-info-item">
+                                <i class="bi bi-flag-fill"></i>
+                                <div>
+                                    <small>Liga</small>
+                                    <strong>{{ entrenador.liga|default:"No asignada" }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="trainer-info-item">
+                                <i class="bi bi-card-text"></i>
+                                <div>
+                                    <small>Documento</small>
+                                    <strong>{{ entrenador.documento }}</strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Equipo Pokémon -->
+                        <div class="trainer-team">
+
+                            <div class="team-heading">
+                                <h4>
+                                    <i class="bi bi-pokeball"></i>
+                                    Equipo Pokémon
+                                </h4>
+
+                                <span>
+                                    {{ entrenador.pokemon.count }} Pokémon
+                                </span>
+                            </div>
+
+                            <div class="team-preview">
+
+                                {% for pokemon in entrenador.pokemon.all|slice:":3" %}
+
+                                    <div class="team-pokemon">
+                                        {% if pokemon.imagen %}
+                                            <img
+                                                src="{{ pokemon.imagen }}"
+                                                alt="{{ pokemon.nombre }}"
+                                                loading="lazy"
+                                                title="{{ pokemon.nombre }}"
+                                            >
+                                        {% else %}
+                                            <i class="bi bi-question-circle"></i>
+                                        {% endif %}
+                                    </div>
+
+                                {% empty %}
+
+                                    <span class="empty-team">
+                                        Sin Pokémon registrados
+                                    </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Acción -->
+                    <!-- Acciones del entrenador -->
+                    <footer class="trainer-card-footer">
+
+                        <a href="{% url 'entrenador_detalle' entrenador.id %}" class="btn-ver">
+                            <i class="bi bi-eye-fill"></i>
+                            Ver perfil
+                        </a>
+
+                        <a href="{% url 'editar_entrenador' entrenador.id %}" class="btn-editar">
+                            <i class="bi bi-pencil-fill"></i>
+                            Editar
+                        </a>
+
+                        <a href="{% url 'eliminar_entrenador' entrenador.id %}" class="btn-eliminar">
+                            <i class="bi bi-trash-fill"></i>
+                            Eliminar
+                        </a>
+
+                    </footer>
+
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+    {% else %}
+
+        <div class="trainers-empty">
+            <div class="empty-icon">
+                <i class="bi bi-person-exclamation"></i>
+            </div>
+
+            {% if buscar %}
+                <h3>No encontramos entrenadores</h3>
+                <p>
+                    No hay resultados para "{{ buscar }}".
+                    Intenta con otro nombre o documento.
+                </p>
+
+                <a href="{% url 'entrenadores' %}">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    Mostrar todos
+                </a>
+            {% else %}
+                <h3>Aún no hay entrenadores registrados</h3>
+                <p>Registra tu primer entrenador para comenzar a construir la comunidad.</p>
+
+                <a href="{% url 'registrar_entrenador' %}">
+                    <i class="bi bi-plus-circle"></i>
+                    Registrar entrenador
+                </a>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

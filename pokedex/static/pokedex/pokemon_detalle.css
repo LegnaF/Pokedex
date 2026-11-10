@@ -1,0 +1,269 @@
+
+/* =========================================
+   PÁGINA DE DETALLES POKÉMON
+========================================= */
+
+.pokemon-page {
+    padding-bottom: 40px;
+}
+
+/* =========================================
+   BOTÓN VOLVER
+========================================= */
+
+.pokemon-page > .mb-4 > .btn {
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pokemon-page > .mb-4 > .btn:hover {
+    transform: translateX(-5px);
+    background: #26364a;
+    color: #ffffff;
+}
+
+/* =========================================
+   TARJETAS GENERALES
+========================================= */
+
+.pokemon-page .card-custom {
+    background: #ffffff;
+    border: 1px solid #e8edf2;
+    border-radius: 22px;
+    padding: 25px;
+    box-shadow: 0 7px 25px rgba(38, 54, 74, 0.06);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.pokemon-page .card-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(38, 54, 74, 0.10);
+}
+
+/* =========================================
+   INFORMACIÓN PRINCIPAL
+========================================= */
+
+.pokemon-page h1 {
+    color: #26364a;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.pokemon-page h4 {
+    color: #26364a;
+    font-weight: 800;
+}
+
+.pokemon-page h5 {
+    color: #26364a;
+    font-weight: 700;
+}
+
+.pokemon-page h6 {
+    color: #344b63;
+    font-weight: 700;
+}
+
+.pokemon-page .text-muted {
+    color: #84909e !important;
+}
+
+/* Número de Pokédex */
+
+.pokemon-page .badge.bg-dark {
+    background: #26364a !important;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   IMAGEN DEL POKÉMON
+========================================= */
+
+.pokemon-page .col-md-5 img {
+    max-width: 100%;
+    height: 350px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.12));
+    animation: aparecerPokemon 0.7s ease;
+    transition: transform 0.4s ease;
+}
+
+.pokemon-page .col-md-5 img:hover {
+    transform: scale(1.08) translateY(-5px);
+}
+
+@keyframes aparecerPokemon {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================
+   TIPOS
+========================================= */
+
+.pokemon-page .pokemon-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pokemon-page .pokemon-type {
+    display: inline-block;
+    min-width: 85px;
+    padding: 9px 17px;
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: capitalize;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+}
+
+.pokemon-page .pokemon-type:hover {
+    transform: scale(1.1);
+}
+
+/* Colores de los tipos */
+
+.tipo-normal { background: #A8A77A; }
+.tipo-fire { background: #EE8130; }
+.tipo-water { background: #6390F0; }
+.tipo-electric { background: #F7D02C; color: #333; }
+.tipo-grass { background: #7AC74C; }
+.tipo-ice { background: #96D9D6; color: #26364a; }
+.tipo-fighting { background: #C22E28; }
+.tipo-poison { background: #A33EA1; }
+.tipo-ground { background: #E2BF65; color: #333; }
+.tipo-flying { background: #A98FF3; }
+.tipo-psychic { background: #F95587; }
+.tipo-bug { background: #A6B91A; }
+.tipo-rock { background: #B6A136; }
+.tipo-ghost { background: #735797; }
+.tipo-dragon { background: #6F35FC; }
+.tipo-dark { background: #705746; }
+.tipo-steel { background: #B7B7CE; color: #26364a; }
+.tipo-fairy { background: #D685AD; }
+
+/* =========================================
+   ALTURA Y PESO
+========================================= */
+
+.pokemon-page .row.g-3 .card-custom {
+    background: linear-gradient(145deg, #ffffff, #f5f7fb);
+    border-radius: 16px;
+    padding: 20px !important;
+    height: 100%;
+}
+
+.pokemon-page .row.g-3 .card-custom i {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   HABILIDADES
+========================================= */
+
+.pokemon-page .bg-light {
+    background: #f5f7fb !important;
+    border: 1px solid #e8edf2;
+    border-radius: 14px !important;
+    transition: all 0.3s ease;
+}
+
+.pokemon-page .bg-light:hover {
+    background: #fff0f1 !important;
+    border-color: #e63946;
+    transform: translateY(-3px);
+}
+
+.pokemon-page .badge.bg-warning {
+    color: #333 !important;
+}
+
+/* =========================================
+   ESTADÍSTICAS
+========================================= */
+
+.pokemon-page .progress {
+    overflow: hidden;
+    background: #e9edf3;
+    border-radius: 20px;
+}
+
+.pokemon-page .progress-bar {
+    border-radius: 20px;
+    background: linear-gradient(90deg, #e63946, #ff8992) !important;
+    transition: width 1s ease;
+}
+
+/* =========================================
+   MOVIMIENTOS
+========================================= */
+
+.pokemon-page .badge.bg-secondary {
+    background: #344b63 !important;
+    padding: 10px 15px !important;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.pokemon-page .badge.bg-secondary:hover {
+    background: #e63946 !important;
+    transform: translateY(-3px);
+}
+
+
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .pokemon-page h1 {
+        font-size: 2rem;
+    }
+
+    .pokemon-page .col-md-5 img {
+        height: 250px;
+        margin-bottom: 25px;
+    }
+
+    .pokemon-page .card-custom {
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .pokemon-page h1 {
+        font-size: 1.7rem;
+    }
+
+    .pokemon-page .col-md-5 img {
+        height: 210px;
+    }
+
+}

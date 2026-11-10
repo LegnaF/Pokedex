@@ -1,0 +1,1012 @@
+
+/* =========================================
+   EDITAR ENTRENADOR - POKEDEX
+========================================= */
+
+.editar-entrenador-page {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 20px 10px 45px;
+    color: #263449;
+}
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.editar-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 38px 42px;
+    margin-bottom: 28px;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #1d2d44, #285b91);
+    color: white;
+    box-shadow: 0 10px 25px rgba(29, 45, 68, 0.15);
+}
+
+.editar-header h1 {
+    margin: 12px 0 8px;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.editar-header p {
+    margin: 0;
+    color: #dce8f8;
+    font-size: 14px;
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.13);
+    color: #ffdc75;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.editar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffdc75;
+    font-size: 48px;
+    transform: rotate(-8deg);
+}
+
+/* =========================================
+   FORMULARIO
+========================================= */
+
+.editar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-section {
+    padding: 30px;
+    border: 1px solid #e8edf4;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 5px 18px rgba(29, 45, 68, 0.05);
+}
+
+/* =========================================
+   TÍTULOS DE SECCIÓN
+========================================= */
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 27px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.form-section-title > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #eaf2ff;
+    color: #3478c8;
+    font-size: 23px;
+}
+
+.form-section-title h2 {
+    margin: 0 0 5px;
+    color: #1d2d44;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.form-section-title p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 13px;
+}
+
+/* =========================================
+   CAMPOS DEL FORMULARIO
+========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    color: #34445a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    min-height: 45px;
+    padding: 11px 14px;
+    border: 1px solid #dce3ed;
+    border-radius: 10px;
+    outline: none;
+    background: #f9fbfe;
+    color: #263449;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3979c9;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(57, 121, 201, 0.12);
+}
+
+.form-group input[type="checkbox"] {
+    width: 18px;
+    min-height: 18px;
+    accent-color: #3979c9;
+}
+
+.field-error,
+.form-errors {
+    color: #d93648;
+    font-size: 12px;
+}
+
+.form-errors {
+    padding: 13px 16px;
+    border: 1px solid #ffc9cf;
+    border-radius: 10px;
+    background: #fff0f1;
+}
+
+/* =========================================
+   EQUIPO POKÉMON
+========================================= */
+
+.pokemon-actuales {
+    margin-bottom: 28px;
+}
+
+.pokemon-actuales h3,
+.pokemon-buscador h3 {
+    margin: 0 0 16px;
+    color: #34445a;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.pokemon-seleccionados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 14px;
+}
+
+.pokemon-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    padding: 17px 12px;
+    overflow: hidden;
+    border: 2px solid #d8e7fa;
+    border-radius: 14px;
+    background: #f2f7ff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.pokemon-item:hover {
+    border-color: #3979c9;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(57, 121, 201, 0.12);
+}
+
+.pokemon-item input {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 17px;
+    height: 17px;
+    accent-color: #3979c9;
+    cursor: pointer;
+}
+
+.pokemon-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.pokemon-item:hover img {
+    transform: scale(1.1);
+}
+
+.pokemon-item span {
+    color: #263449;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.pokemon-item > i {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    color: #319b68;
+    font-size: 16px;
+}
+
+.pokemon-item:has(input:not(:checked)) {
+    border-color: #e1e5eb;
+    background: #f8f9fb;
+    opacity: 0.55;
+}
+
+.pokemon-item:has(input:not(:checked)) > i {
+    display: none;
+}
+
+.sin-pokemon {
+    grid-column: 1 / -1;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff8e7;
+    color: #987126;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* =========================================
+   BUSCADOR DE POKÉMON
+========================================= */
+
+.pokemon-buscador {
+    padding: 22px;
+    border: 1px dashed #cbd8e9;
+    border-radius: 14px;
+    background: #f9fbff;
+}
+
+.pokemon-search-box {
+    display: flex;
+    gap: 12px;
+}
+
+.pokemon-search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 15px;
+    border: 1px solid #dce3ed;
+    border-radius: 10px;
+    outline: none;
+    background: white;
+    font-size: 14px;
+}
+
+.pokemon-search-box input:focus {
+    border-color: #3979c9;
+    box-shadow: 0 0 0 3px rgba(57, 121, 201, 0.12);
+}
+
+.pokemon-search-box button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #3979c9;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.pokemon-search-box button:hover {
+    background: #285b91;
+    transform: translateY(-2px);
+}
+
+/* Resultado de búsqueda */
+
+#resultado-pokemon {
+    margin-top: 18px;
+}
+
+.pokemon-resultado {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 15px;
+    border: 1px solid #dce8f8;
+    border-radius: 12px;
+    background: white;
+}
+
+.pokemon-resultado img {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+}
+
+.pokemon-resultado-info {
+    flex: 1;
+}
+
+.pokemon-resultado-info h4 {
+    margin: 0 0 5px;
+    color: #263449;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.pokemon-resultado-info p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 12px;
+}
+
+.pokemon-resultado button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 9px;
+    background: #e94355;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pokemon-resultado button:hover {
+    background: #c92d40;
+    transform: translateY(-2px);
+}
+
+.pokemon-help {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 17px 0 0;
+    color: #738198;
+    font-size: 12px;
+}
+
+/* =========================================
+   BOTONES FINALES
+========================================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 13px;
+    padding: 20px 0;
+}
+
+.btn-cancelar,
+.btn-guardar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-width: 155px;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-cancelar {
+    border: 1px solid #dce3ed;
+    background: white;
+    color: #64748b;
+}
+
+.btn-cancelar:hover {
+    background: #eef1f5;
+    color: #263449;
+}
+
+.btn-guardar {
+    background: #e94355;
+    color: white;
+    box-shadow: 0 5px 12px rgba(233, 67, 85, 0.2);
+}
+
+.btn-guardar:hover {
+    background: #c92d40;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(233, 67, 85, 0.25);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .editar-header {
+        padding: 28px;
+    }
+
+    .editar-header h1 {
+        font-size: 26px;
+    }
+
+    .editar-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 35px;
+    }
+
+    .form-section {
+        padding: 22px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pokemon-seleccionados {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+
+    .editar-entrenador-page {
+        padding: 10px 5px 30px;
+    }
+
+    .editar-header {
+        padding: 25px 20px;
+    }
+
+    .editar-header h1 {
+        font-size: 23px;
+    }
+
+    .editar-header p {
+        max-width: 230px;
+        font-size: 12px;
+    }
+
+    .editar-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 15px;
+        font-size: 27px;
+    }
+
+    .form-section {
+        padding: 18px;
+    }
+
+    .form-section-title h2 {
+        font-size: 16px;
+    }
+
+    .pokemon-search-box {
+        flex-direction: column;
+    }
+
+    .pokemon-search-box button {
+        width: 100%;
+    }
+
+    .pokemon-resultado {
+        flex-wrap: wrap;
+    }
+
+    .pokemon-resultado button {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-cancelar,
+    .btn-guardar {
+        width: 100%;
+    }
+}
+
+
+
+/* =========================================
+   EQUIPO POKÉMON - EDITAR ENTRENADOR
+========================================= */
+
+.pokemon-section {
+    overflow: hidden;
+}
+
+/* =========================================
+   BUSCADOR
+========================================= */
+
+.pokemon-search-container {
+    margin-bottom: 25px;
+}
+
+.pokemon-search-container label {
+    display: block;
+    margin-bottom: 10px;
+    color: #263449;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.pokemon-search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 17px;
+    min-height: 54px;
+    border: 1px solid #dce3ed;
+    border-radius: 12px;
+    background: #f8faff;
+    transition: all 0.25s ease;
+}
+
+.pokemon-search-box:focus-within {
+    border-color: #3979c9;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(57, 121, 201, 0.10);
+}
+
+.pokemon-search-box > i {
+    color: #3979c9;
+    font-size: 19px;
+}
+
+.pokemon-search-box input {
+    width: 100%;
+    height: 52px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #263449;
+    font-size: 14px;
+}
+
+.pokemon-search-box input::placeholder {
+    color: #9aa6b6;
+}
+
+.search-help {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 10px;
+    color: #8793a5;
+    font-size: 12px;
+}
+
+/* =========================================
+   RESULTADOS DE POKÉAPI
+========================================= */
+
+.resultados-pokemon {
+    margin-bottom: 30px;
+}
+
+.pokemon-search-empty,
+.pokemon-no-encontrado,
+.pokemon-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 150px;
+    padding: 25px;
+    border: 1px dashed #d5dfed;
+    border-radius: 14px;
+    background: #f8faff;
+    text-align: center;
+}
+
+.pokemon-search-empty > i,
+.pokemon-no-encontrado > i {
+    color: #3979c9;
+    font-size: 35px;
+}
+
+.pokemon-no-encontrado > i {
+    color: #e94355;
+}
+
+.pokemon-search-empty p,
+.pokemon-no-encontrado p,
+.pokemon-loading p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 13px;
+}
+
+.pokemon-no-encontrado h4 {
+    margin: 0;
+    color: #263449;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.pokemon-loading .spinner-border {
+    width: 30px;
+    height: 30px;
+}
+
+/* Tarjeta del resultado */
+
+.pokemon-result-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 22px;
+    border: 1px solid #dce8f8;
+    border-left: 5px solid #3979c9;
+    border-radius: 14px;
+    background: #f8faff;
+    animation: aparecerPokemon 0.3s ease;
+}
+
+.pokemon-result-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: #eaf2ff;
+}
+
+.pokemon-result-image img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.pokemon-result-card:hover .pokemon-result-image img {
+    transform: scale(1.1);
+}
+
+.pokemon-result-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pokemon-result-info > span {
+    color: #3979c9;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.pokemon-result-info h3 {
+    margin: 5px 0;
+    color: #263449;
+    font-size: 19px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.pokemon-result-info p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
+.btn-agregar-pokemon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 115px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #e94355;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-agregar-pokemon:hover:not(:disabled) {
+    background: #c92d40;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(233, 67, 85, 0.2);
+}
+
+.btn-agregar-pokemon:disabled {
+    background: #319b68;
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+/* =========================================
+   EQUIPO DEL ENTRENADOR
+========================================= */
+
+.equipo-seleccionado-container {
+    padding: 23px;
+    border: 1px solid #e4eaf2;
+    border-radius: 15px;
+    background: #fbfcfe;
+}
+
+.equipo-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e9edf3;
+}
+
+.equipo-titulo h3 {
+    margin: 0 0 5px;
+    color: #263449;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.equipo-titulo p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 12px;
+}
+
+.equipo-titulo > span {
+    padding: 8px 13px;
+    border-radius: 20px;
+    background: #eaf2ff;
+    color: #2864b4;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* =========================================
+   TARJETAS DEL EQUIPO
+========================================= */
+
+.equipo-seleccionado {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 16px;
+}
+
+.pokemon-team-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 18px 12px;
+    border: 1px solid #dce8f8;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(29, 45, 68, 0.04);
+    transition: all 0.25s ease;
+    animation: aparecerPokemon 0.3s ease;
+}
+
+.pokemon-team-card:hover {
+    border-color: #3979c9;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(57, 121, 201, 0.12);
+}
+
+.pokemon-team-card > img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: transform 0.25s ease;
+}
+
+.pokemon-team-card:hover > img {
+    transform: scale(1.08);
+}
+
+.pokemon-team-card h4 {
+    margin: 0;
+    color: #263449;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.pokemon-team-type {
+    padding: 5px 11px;
+    border-radius: 20px;
+    background: #edf3fb;
+    color: #3979c9;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Botón quitar */
+
+.btn-quitar-pokemon {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29px;
+    height: 29px;
+    border: none;
+    border-radius: 8px;
+    background: #ffebed;
+    color: #d93648;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-quitar-pokemon:hover {
+    background: #d93648;
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* Equipo vacío */
+
+.equipo-vacio {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 30px 15px;
+    border: 1px dashed #d5dfed;
+    border-radius: 12px;
+    background: #f8faff;
+    color: #8793a5;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* =========================================
+   MENSAJE INFORMATIVO
+========================================= */
+
+.pokemon-help {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 18px 0 0;
+    color: #718096;
+    font-size: 12px;
+}
+
+.pokemon-help i {
+    color: #319b68;
+    font-size: 16px;
+}
+
+/* =========================================
+   ANIMACIONES
+========================================= */
+
+@keyframes aparecerPokemon {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .pokemon-result-card {
+        flex-wrap: wrap;
+        gap: 13px;
+        padding: 15px;
+    }
+
+    .pokemon-result-image {
+        width: 75px;
+        height: 75px;
+    }
+
+    .pokemon-result-image img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .pokemon-result-info h3 {
+        font-size: 16px;
+    }
+
+    .btn-agregar-pokemon {
+        width: 100%;
+    }
+
+    .equipo-seleccionado-container {
+        padding: 16px;
+    }
+
+    .equipo-seleccionado {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .pokemon-team-card > img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .equipo-titulo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .equipo-seleccionado {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pokemon-team-card {
+        padding: 15px 8px;
+    }
+
+    .pokemon-team-card h4 {
+        font-size: 12px;
+    }
+}

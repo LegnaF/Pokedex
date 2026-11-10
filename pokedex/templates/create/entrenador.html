@@ -1,0 +1,273 @@
+
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Registrar entrenador | Pokédex{% endblock %}
+{% block page_heading %}Registrar entrenador{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'create/entrenador.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="registro-container">
+
+    <div class="registro-header">
+        <div>
+            <span class="etiqueta">CENTRO POKÉMON</span>
+            <h1>Nuevo entrenador</h1>
+            <p>Registra tu información y selecciona tus Pokémon favoritos.</p>
+        </div>
+        <div class="pokeball-icon">⚪</div>
+    </div>
+
+    <form method="POST" class="registro-form">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <section class="form-section">
+            <div class="section-title">
+                <span class="section-number">01</span>
+                <div>
+                    <h2>Información personal</h2>
+                    <p>Datos básicos del entrenador.</p>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+
+                        {% if field.errors %}
+                            <small class="field-error">{{ field.errors|striptags }}</small>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="section-title">
+                <span class="section-number">02</span>
+                <div>
+                    <h2>Tu equipo Pokémon</h2>
+                    <p>Busca y selecciona los Pokémon que acompañarán al entrenador.</p>
+                </div>
+            </div>
+
+            <div class="buscador-container">
+                <input
+                    type="text"
+                    id="buscadorPokemon"
+                    placeholder="Buscar Pokémon por nombre..."
+                    autocomplete="off"
+                >
+                <button type="button" id="buscarPokemon">Buscar</button>
+            </div>
+
+            <div id="mensajeBusqueda" class="mensaje-busqueda">
+                Escribe el nombre de un Pokémon para buscarlo.
+            </div>
+
+            <div id="resultadosPokemon" class="pokemon-grid"></div>
+
+            <div class="seleccion-container">
+                <div class="seleccion-header">
+                    <h3>Pokémon seleccionados</h3>
+                    <span id="contadorPokemon">0 seleccionados</span>
+                </div>
+
+                <div id="pokemonSeleccionados" class="seleccion-grid">
+                    <p class="seleccion-vacia">Todavía no has seleccionado Pokémon.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="form-actions">
+            <a href="{% url 'entrenadores' %}" class="btn-cancelar">Cancelar</a>
+            <button type="submit" class="btn-registrar">
+                Registrar entrenador
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    const buscador = document.getElementById('buscadorPokemon');
+    const botonBuscar = document.getElementById('buscarPokemon');
+    const resultados = document.getElementById('resultadosPokemon');
+    const seleccionados = document.getElementById('pokemonSeleccionados');
+    const mensaje = document.getElementById('mensajeBusqueda');
+    const contador = document.getElementById('contadorPokemon');
+
+    // Guarda los Pokémon seleccionados
+    const equipoPokemon = new Map();
+
+    async function buscarPokemon() {
+        const nombre = buscador.value.trim().toLowerCase();
+
+        if (!nombre) {
+            mensaje.textContent = 'Escribe el nombre de un Pokémon.';
+            return;
+        }
+
+        resultados.innerHTML = '';
+        mensaje.textContent = 'Buscando Pokémon...';
+
+        try {
+            const respuesta = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(nombre)}`
+            );
+
+            if (!respuesta.ok) {
+                throw new Error('Pokémon no encontrado');
+            }
+
+            const pokemon = await respuesta.json();
+
+            const imagen = pokemon.sprites.other['official-artwork'].front_default
+                || pokemon.sprites.front_default;
+
+            const tipos = pokemon.types
+                .map(tipo => tipo.type.name)
+                .join(' / ');
+
+            mensaje.textContent = 'Resultado encontrado.';
+
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'pokemon-card';
+
+            const nombrePokemon = document.createElement('h3');
+            nombrePokemon.textContent = pokemon.name;
+
+            const imagenPokemon = document.createElement('img');
+            imagenPokemon.src = imagen || '';
+            imagenPokemon.alt = pokemon.name;
+
+            const tipoPokemon = document.createElement('p');
+            tipoPokemon.textContent = tipos;
+
+            const boton = document.createElement('button');
+            boton.type = 'button';
+
+            function actualizarBoton() {
+                const agregado = equipoPokemon.has(pokemon.id);
+                boton.textContent = agregado ? '✓ Agregado' : '+ Agregar';
+                boton.classList.toggle('agregado', agregado);
+            }
+
+            boton.addEventListener('click', () => {
+                if (equipoPokemon.has(pokemon.id)) {
+                    equipoPokemon.delete(pokemon.id);
+                } else {
+                    equipoPokemon.set(pokemon.id, {
+                        id: pokemon.id,
+                        nombre: pokemon.name,
+                        imagen: imagen,
+                        tipos: tipos
+                    });
+                }
+
+                actualizarSeleccionados();
+                actualizarBoton();
+            });
+
+            actualizarBoton();
+
+            tarjeta.appendChild(imagenPokemon);
+            tarjeta.appendChild(nombrePokemon);
+            tarjeta.appendChild(tipoPokemon);
+            tarjeta.appendChild(boton);
+
+            resultados.appendChild(tarjeta);
+
+        } catch (error) {
+            mensaje.textContent = 'No se encontró ese Pokémon. Intenta con otro nombre.';
+        }
+    }
+
+    function actualizarSeleccionados() {
+        seleccionados.innerHTML = '';
+
+        contador.textContent =
+            `${equipoPokemon.size} seleccionados`;
+
+        if (equipoPokemon.size === 0) {
+            seleccionados.innerHTML =
+                '<p class="seleccion-vacia">Todavía no has seleccionado Pokémon.</p>';
+            return;
+        }
+
+        equipoPokemon.forEach(pokemon => {
+            const tarjeta = document.createElement('div');
+            tarjeta.className = 'pokemon-seleccionado';
+
+            const imagen = document.createElement('img');
+            imagen.src = pokemon.imagen || '';
+            imagen.alt = pokemon.nombre;
+
+            const informacion = document.createElement('div');
+
+            const nombre = document.createElement('strong');
+            nombre.textContent = pokemon.nombre;
+
+            const tipos = document.createElement('small');
+            tipos.textContent = pokemon.tipos;
+
+            const eliminar = document.createElement('button');
+            eliminar.type = 'button';
+            eliminar.textContent = '×';
+            eliminar.title = 'Quitar Pokémon';
+
+            eliminar.addEventListener('click', () => {
+                equipoPokemon.delete(pokemon.id);
+                actualizarSeleccionados();
+
+                const botonResultado = [...resultados.querySelectorAll('.pokemon-card')]
+                    .find(card => card.querySelector('h3')?.textContent === pokemon.nombre);
+
+                if (botonResultado) {
+                    const boton = botonResultado.querySelector('button');
+                    boton.textContent = '+ Agregar';
+                    boton.classList.remove('agregado');
+                }
+            });
+
+            // ID enviado a Django mediante el formulario
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'pokemon';
+            input.value = pokemon.id;
+
+            informacion.appendChild(nombre);
+            informacion.appendChild(tipos);
+
+            tarjeta.appendChild(imagen);
+            tarjeta.appendChild(informacion);
+            tarjeta.appendChild(eliminar);
+            tarjeta.appendChild(input);
+
+            seleccionados.appendChild(tarjeta);
+        });
+    }
+
+    botonBuscar.addEventListener('click', buscarPokemon);
+
+    buscador.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Enter') {
+            evento.preventDefault();
+            buscarPokemon();
+        }
+    });
+</script>
+
+{% endblock %}

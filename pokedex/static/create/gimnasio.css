@@ -1,0 +1,386 @@
+
+/* =========================================
+   POKEDEX - REGISTRO DE GIMNASIOS
+========================================= */
+
+:root {
+    --pokedex-red: #e63946;
+    --pokedex-red-dark: #bd2634;
+    --pokedex-blue: #162b45;
+    --pokedex-blue-light: #244568;
+    --pokedex-dark: #101923;
+    --pokedex-panel: #192735;
+    --pokedex-card: #223447;
+    --pokedex-yellow: #978333;
+    --pokedex-white: #f4f7fb;
+    --pokedex-gray: #aab7c4;
+}
+
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
+.gimnasio-container {
+    max-width: 1150px;
+    margin: 35px auto;
+    padding: 25px;
+    color: var(--pokedex-white);
+}
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.gimnasio-header {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #172c43, #274d70);
+    border: 1px solid #42617e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+}
+
+.gimnasio-header::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: 80px;
+    top: -150px;
+    border: 35px solid rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.gimnasio-header::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: -80px;
+    bottom: -130px;
+    border: 25px solid rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.gimnasio-etiqueta {
+    display: inline-block;
+    background: var(--pokedex-red);
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 8px 14px;
+    border-radius: 5px;
+}
+
+.gimnasio-header h1 {
+    color: white;
+    font-size: 34px;
+    font-weight: 900;
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gimnasio-header p {
+    color: #c5d5e5;
+    font-size: 14px;
+    margin: 0;
+}
+
+.gimnasio-header-icon {
+    position: relative;
+    z-index: 1;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #e63946, #bd2634);
+    border: 5px solid #101923;
+    border-radius: 25px;
+    color: white;
+    font-size: 48px;
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================
+   FORMULARIO
+========================================= */
+
+.gimnasio-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.gimnasio-form-section {
+    background: var(--pokedex-panel);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #34485c;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   TÍTULO DE SECCIÓN
+========================================= */
+
+.gimnasio-section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #35485b;
+}
+
+.gimnasio-section-number {
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pokedex-red);
+    color: white;
+    border-radius: 10px;
+    font-weight: 900;
+    box-shadow: 0 4px 12px #e6394640;
+    font-size: 20px;
+}
+
+.gimnasio-section-title h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.gimnasio-section-title p {
+    color: var(--pokedex-gray);
+    font-size: 13px;
+    margin: 0;
+}
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.gimnasio-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.gimnasio-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.gimnasio-form-group label {
+    color: #dce6f0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.gimnasio-form-group label i {
+    color: var(--pokedex-red);
+    margin-right: 7px;
+}
+
+.gimnasio-form-group input,
+.gimnasio-form-group select,
+.gimnasio-form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: #111d29;
+    color: white;
+    border: 1px solid #3b5065;
+    padding: 14px 15px;
+    border-radius: 9px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.gimnasio-form-group input::placeholder {
+    color: #718397;
+}
+
+.gimnasio-form-group select option {
+    background: #192735;
+    color: white;
+}
+
+.gimnasio-form-group input:focus,
+.gimnasio-form-group select:focus,
+.gimnasio-form-group textarea:focus {
+    border-color: var(--pokedex-red);
+    box-shadow: 0 0 0 3px #e6394625;
+    background: #142333;
+}
+
+.gimnasio-field-error {
+    color: #ff737d;
+    font-size: 12px;
+}
+
+/* =========================================
+   MENSAJE DE ERROR
+========================================= */
+
+.gimnasio-error-message {
+    padding: 15px;
+    background: #e6394618;
+    border: 1px solid #e63946;
+    border-radius: 9px;
+    color: #ff737d;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   INFORMACIÓN ADICIONAL
+========================================= */
+
+.gimnasio-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 18px;
+    background: #111d29;
+    border: 1px solid #34485c;
+    border-radius: 12px;
+}
+
+.gimnasio-info i {
+    color: var(--pokedex-yellow);
+    font-size: 20px;
+}
+
+.gimnasio-info p {
+    color: #b8c9d9;
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+
+.gimnasio-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 13px;
+    margin-bottom: 30px;
+}
+
+.gimnasio-btn-cancelar,
+.gimnasio-btn-registrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 14px 24px;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gimnasio-btn-cancelar {
+    background: #26394b;
+    border: 1px solid #40566b;
+    color: white;
+}
+
+.gimnasio-btn-cancelar:hover {
+    background: #354c62;
+    color: white;
+}
+
+.gimnasio-btn-registrar {
+    background: var(--pokedex-red);
+    color: white;
+    border: none;
+}
+
+.gimnasio-btn-registrar:hover {
+    background: var(--pokedex-red-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px #e6394650;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .gimnasio-container {
+        padding: 12px;
+    }
+
+    .gimnasio-header {
+        padding: 25px;
+    }
+
+    .gimnasio-header h1 {
+        font-size: 25px;
+    }
+
+    .gimnasio-header-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 32px;
+    }
+
+    .gimnasio-form-section {
+        padding: 20px;
+    }
+
+    .gimnasio-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gimnasio-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .gimnasio-form-actions a,
+    .gimnasio-form-actions button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .gimnasio-header {
+        padding: 20px;
+    }
+
+    .gimnasio-header h1 {
+        font-size: 21px;
+    }
+
+    .gimnasio-header-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .gimnasio-section-title h2 {
+        font-size: 16px;
+    }
+}

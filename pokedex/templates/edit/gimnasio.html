@@ -1,0 +1,111 @@
+
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Editar gimnasio | Pokédex{% endblock %}
+{% block page_heading %}Editar gimnasio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'edit/gimnasio.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="gimnasio-container">
+
+    <div class="gimnasio-header">
+        <div>
+            <span class="gimnasio-etiqueta">POKÉDEX / GIMNASIOS</span>
+            <h1>Editar gimnasio</h1>
+            <p>Actualiza la información del gimnasio y su líder.</p>
+        </div>
+
+        <div class="gimnasio-header-icon">
+            <i class="bi bi-pencil-square"></i>
+        </div>
+    </div>
+
+    <form method="POST" class="gimnasio-form">
+        {% csrf_token %}
+
+        <section class="gimnasio-form-section">
+
+            <div class="gimnasio-section-title">
+                <div class="gimnasio-section-number">01</div>
+                <div>
+                    <h2>Información del gimnasio</h2>
+                    <p>Modifica los datos que necesites actualizar.</p>
+                </div>
+            </div>
+
+            {% if form.non_field_errors %}
+                <div class="gimnasio-error-message">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="gimnasio-form-grid">
+
+                {% for field in form %}
+                    <div class="gimnasio-form-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {% if field.name == 'lider_gimnasio' %}
+                                <i class="bi bi-person-badge-fill"></i>
+                            {% elif field.name == 'tipo_elemento' %}
+                                <i class="bi bi-lightning-charge-fill"></i>
+                            {% elif field.name == 'medalla' %}
+                                <i class="bi bi-award-fill"></i>
+                            {% elif field.name == 'ciudad' %}
+                                <i class="bi bi-geo-alt-fill"></i>
+                            {% elif field.name == 'telefono' %}
+                                <i class="bi bi-telephone-fill"></i>
+                            {% elif field.name == 'region' %}
+                                <i class="bi bi-map-fill"></i>
+                            {% endif %}
+
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% for error in field.errors %}
+                            <span class="gimnasio-field-error">
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+        <div class="gimnasio-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <p>
+                Comprueba que la información del gimnasio sea correcta
+                antes de guardar los cambios.
+            </p>
+        </div>
+
+        <div class="gimnasio-form-actions">
+
+            <a href="{% url 'gimnasios' %}" class="gimnasio-btn-cancelar">
+                <i class="bi bi-arrow-left"></i>
+                Cancelar
+            </a>
+
+            <button type="submit" class="gimnasio-btn-registrar">
+                <i class="bi bi-check-circle-fill"></i>
+                Guardar cambios
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+```

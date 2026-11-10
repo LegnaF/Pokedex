@@ -1,0 +1,357 @@
+
+/* =========================================
+   POKEDEX - ELIMINAR GIMNASIO
+========================================= */
+
+:root {
+    --pokedex-red: #e63946;
+    --pokedex-red-dark: #bd2634;
+    --pokedex-blue: #162b45;
+    --pokedex-blue-light: #244568;
+    --pokedex-dark: #101923;
+    --pokedex-panel: #192735;
+    --pokedex-card: #223447;
+    --pokedex-yellow: #ffcb05;
+    --pokedex-white: #f4f7fb;
+    --pokedex-gray: #aab7c4;
+}
+
+/* CONTENEDOR */
+
+.eliminar-gimnasio-container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 25px auto;
+    color: var(--pokedex-white);
+}
+
+/* ENCABEZADO */
+
+.eliminar-gimnasio-header {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin-bottom: 25px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #172c43, #274d70);
+    border: 1px solid #344e68;
+}
+
+.eliminar-gimnasio-header::before,
+.eliminar-gimnasio-header::after {
+    content: "";
+    position: absolute;
+    border: 2px solid rgba(255,255,255,.07);
+    border-radius: 50%;
+}
+
+.eliminar-gimnasio-header::before {
+    width: 180px;
+    height: 180px;
+    right: 80px;
+    top: -100px;
+}
+
+.eliminar-gimnasio-header::after {
+    width: 130px;
+    height: 130px;
+    right: 105px;
+    top: -75px;
+}
+
+.eliminar-gimnasio-etiqueta {
+    color: var(--pokedex-yellow);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.eliminar-gimnasio-header h1 {
+    margin: 10px 0;
+    color: white;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.eliminar-gimnasio-header p {
+    margin: 0;
+    color: #c4d1df;
+    font-size: 14px;
+}
+
+.eliminar-gimnasio-icono {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(230,57,70,.18);
+    border: 1px solid rgba(230,57,70,.5);
+    color: var(--pokedex-red);
+    font-size: 34px;
+    z-index: 1;
+}
+
+/* TARJETA */
+
+.eliminar-gimnasio-card {
+    padding: 30px;
+    background: var(--pokedex-panel);
+    border: 1px solid #34485c;
+    border-radius: 18px;
+}
+
+/* ALERTA */
+
+.eliminar-gimnasio-alerta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #34485c;
+}
+
+.eliminar-gimnasio-alerta-icono {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: rgba(255,203,5,.12);
+    color: var(--pokedex-yellow);
+    font-size: 25px;
+}
+
+.eliminar-gimnasio-alerta h2 {
+    margin: 0 0 6px;
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.eliminar-gimnasio-alerta p {
+    margin: 0;
+    color: var(--pokedex-gray);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* INFORMACIÓN DEL GIMNASIO */
+
+.eliminar-gimnasio-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 25px 0;
+}
+
+.eliminar-gimnasio-avatar {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #244568, #162b45);
+    border: 1px solid #405b77;
+    color: var(--pokedex-yellow);
+    font-size: 30px;
+}
+
+.eliminar-gimnasio-datos span {
+    color: var(--pokedex-red);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.eliminar-gimnasio-datos h3 {
+    margin: 5px 0;
+    color: white;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.eliminar-gimnasio-datos p {
+    margin: 0;
+    color: var(--pokedex-gray);
+    font-size: 13px;
+}
+
+.eliminar-gimnasio-datos p i {
+    color: var(--pokedex-yellow);
+    margin-right: 5px;
+}
+
+/* DETALLES */
+
+.eliminar-gimnasio-detalles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px 0;
+    border-top: 1px solid #34485c;
+    border-bottom: 1px solid #34485c;
+}
+
+.eliminar-gimnasio-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--pokedex-card);
+    border: 1px solid #34485c;
+}
+
+.eliminar-gimnasio-detalle span {
+    color: var(--pokedex-gray);
+    font-size: 12px;
+}
+
+.eliminar-gimnasio-detalle strong {
+    color: white;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+/* ADVERTENCIA */
+
+.eliminar-gimnasio-advertencia {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    margin: 22px 0;
+    border-radius: 12px;
+    background: rgba(230,57,70,.09);
+    border: 1px solid rgba(230,57,70,.3);
+}
+
+.eliminar-gimnasio-advertencia i {
+    color: var(--pokedex-red);
+    font-size: 18px;
+}
+
+.eliminar-gimnasio-advertencia p {
+    margin: 0;
+    color: #d5c4c7;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* BOTONES */
+
+.eliminar-gimnasio-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.btn-gimnasio-cancelar,
+.btn-gimnasio-eliminar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .25s ease;
+}
+
+.btn-gimnasio-cancelar {
+    background: #263849;
+    color: #d5e0eb;
+    border: 1px solid #40566b;
+}
+
+.btn-gimnasio-cancelar:hover {
+    background: #344c62;
+    color: white;
+}
+
+.btn-gimnasio-eliminar {
+    background: var(--pokedex-red);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-gimnasio-eliminar:hover {
+    background: var(--pokedex-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230,57,70,.25);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+
+    .eliminar-gimnasio-header {
+        padding: 25px;
+    }
+
+    .eliminar-gimnasio-header h1 {
+        font-size: 23px;
+    }
+
+    .eliminar-gimnasio-icono {
+        width: 55px;
+        height: 55px;
+        font-size: 25px;
+    }
+
+    .eliminar-gimnasio-card {
+        padding: 20px;
+    }
+
+    .eliminar-gimnasio-detalles {
+        grid-template-columns: 1fr;
+    }
+
+    .eliminar-gimnasio-acciones {
+        flex-direction: column-reverse;
+    }
+
+    .btn-gimnasio-cancelar,
+    .btn-gimnasio-eliminar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .eliminar-gimnasio-header {
+        padding: 22px;
+    }
+
+    .eliminar-gimnasio-icono {
+        display: none;
+    }
+
+    .eliminar-gimnasio-info {
+        align-items: flex-start;
+    }
+
+    .eliminar-gimnasio-avatar {
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        font-size: 23px;
+    }
+
+    .eliminar-gimnasio-datos h3 {
+        font-size: 17px;
+    }
+}

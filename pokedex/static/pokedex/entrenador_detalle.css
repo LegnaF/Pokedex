@@ -1,0 +1,389 @@
+
+/* =========================================
+   PERFIL DEL ENTRENADOR
+========================================= */
+
+.perfil-entrenador {
+    color: #293345;
+    padding-bottom: 35px;
+}
+
+/* VOLVER */
+
+.volver-entrenadores {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #5276a5;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.volver-entrenadores:hover {
+    color: #e34444;
+}
+
+/* HERO */
+
+.perfil-hero {
+    background: linear-gradient(120deg, #273447, #3d5574);
+    border-radius: 20px;
+    padding: 35px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    color: white;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.perfil-avatar {
+    width: 145px;
+    height: 145px;
+    min-width: 145px;
+    border-radius: 50%;
+    border: 5px solid rgba(255,255,255,.85);
+    background: #e8edf5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-avatar i {
+    font-size: 75px;
+    color: #63758f;
+}
+
+.perfil-identidad {
+    flex: 1;
+    min-width: 0;
+}
+
+.perfil-etiqueta {
+    color: #ffcf45;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.perfil-identidad h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 12px 0;
+}
+
+.perfil-identidad p {
+    color: #d4dfed;
+    font-size: 14px;
+}
+
+.perfil-documento {
+    display: inline-block;
+    color: #d4dfed;
+    background: rgba(255,255,255,.1);
+    padding: 8px 12px;
+    border-radius: 7px;
+    font-size: 11px;
+}
+
+.perfil-medallas {
+    min-width: 105px;
+    text-align: center;
+    background: rgba(255,255,255,.1);
+    padding: 18px;
+    border-radius: 15px;
+}
+
+.perfil-medallas i {
+    display: block;
+    color: #ffcf45;
+    font-size: 27px;
+}
+
+.perfil-medallas strong {
+    display: block;
+    font-size: 30px;
+    margin: 5px 0;
+}
+
+.perfil-medallas span {
+    color: #d4dfed;
+    font-size: 11px;
+}
+
+/* SECCIONES */
+
+.perfil-informacion,
+.perfil-equipo {
+    background: white;
+    padding: 25px;
+    border-radius: 17px;
+    border: 1px solid #e8ebf0;
+    margin-bottom: 23px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.035);
+}
+
+.perfil-section-heading {
+    margin-bottom: 22px;
+}
+
+.perfil-section-heading > span,
+.equipo-heading span {
+    color: #e34444;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.perfil-section-heading h2 {
+    font-size: 21px;
+    font-weight: 800;
+    margin: 7px 0;
+}
+
+.perfil-section-heading p {
+    font-size: 12px;
+    color: #929baa;
+}
+
+/* DATOS */
+
+.perfil-datos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.perfil-dato {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px;
+    background: #f7f9fc;
+    border-radius: 12px;
+    min-width: 0;
+}
+
+.perfil-dato > i {
+    color: #e34444;
+    font-size: 22px;
+}
+
+.perfil-dato small {
+    display: block;
+    color: #929baa;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.perfil-dato strong {
+    display: block;
+    color: #293345;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* EQUIPO */
+
+.equipo-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.total-equipo {
+    background: #edf3ff;
+    color: #3974c9;
+    padding: 11px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.perfil-pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.perfil-pokemon-card {
+    border: 1px solid #e8ebf0;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: .25s;
+    background: white;
+}
+
+.perfil-pokemon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 9px 20px rgba(0,0,0,.08);
+}
+
+.pokemon-imagen {
+    height: 175px;
+    background: linear-gradient(145deg, #f0f4fa, #e4ebf5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon-imagen img {
+    width: 75%;
+    height: 90%;
+    object-fit: contain;
+    transition: .25s;
+}
+
+.perfil-pokemon-card:hover .pokemon-imagen img {
+    transform: scale(1.08);
+}
+
+.pokemon-informacion {
+    padding: 17px;
+}
+
+.pokemon-numero {
+    color: #929baa;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.pokemon-informacion h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 7px 0 12px;
+    color: #293345;
+}
+
+.pokemon-tipos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.tipo-badge {
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    color: white;
+    background: #8992a1;
+}
+
+/* TIPOS POKÉMON */
+
+.tipo-normal { background: #A8A878; }
+.tipo-fire { background: #F08030; }
+.tipo-water { background: #6890F0; }
+.tipo-grass { background: #78C850; }
+.tipo-electric { background: #F8D030; color: #333; }
+.tipo-ice { background: #98D8D8; color: #333; }
+.tipo-fighting { background: #C03028; }
+.tipo-poison { background: #A040A0; }
+.tipo-ground { background: #E0C068; color: #333; }
+.tipo-flying { background: #A890F0; }
+.tipo-psychic { background: #F85888; }
+.tipo-bug { background: #A8B820; }
+.tipo-rock { background: #B8A038; }
+.tipo-ghost { background: #705898; }
+.tipo-dragon { background: #7038F8; }
+.tipo-dark { background: #705848; }
+.tipo-steel { background: #B8B8D0; color: #333; }
+.tipo-fairy { background: #EE99AC; }
+
+/* HABILIDAD */
+
+.pokemon-habilidad {
+    border-top: 1px solid #edf0f4;
+    margin-top: 15px;
+    padding-top: 12px;
+}
+
+.pokemon-habilidad small {
+    display: block;
+    color: #929baa;
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.pokemon-habilidad strong {
+    font-size: 12px;
+    color: #39465a;
+}
+
+/* EQUIPO VACÍO */
+
+.equipo-vacio {
+    padding: 40px 15px;
+    text-align: center;
+    background: #f7f9fc;
+    border-radius: 13px;
+}
+
+.equipo-vacio i {
+    font-size: 38px;
+    color: #a5b3c7;
+}
+
+.equipo-vacio h3 {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 12px 0 7px;
+}
+
+.equipo-vacio p {
+    color: #929baa;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .perfil-datos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .perfil-pokemon-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .perfil-hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 18px;
+    }
+
+    .perfil-identidad h1 {
+        font-size: 24px;
+    }
+
+    .perfil-datos-grid,
+    .perfil-pokemon-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .equipo-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .perfil-informacion,
+    .perfil-equipo {
+        padding: 18px;
+    }
+}

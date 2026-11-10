@@ -1,0 +1,231 @@
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}{{ pokemon.name|title }} | Pokédex{% endblock %}
+{% block page_heading %}Detalles Pokémon{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pokedex/pokemon_detalle.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="pokemon-page">
+
+    <!-- BOTÓN VOLVER -->
+    <div class="mb-4">
+        <a href="{% url 'pokemon' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>
+            Volver a la Pokédex
+        </a>
+    </div>
+
+    <!-- INFORMACIÓN PRINCIPAL -->
+    <div class="card-custom p-4 mb-4">
+
+        <div class="row align-items-center">
+
+            <!-- IMAGEN -->
+            <div class="col-md-5 text-center">
+
+                {% if pokemon.imagen %}
+
+                    <img
+                        src="{{ pokemon.imagen }}"
+                        alt="{{ pokemon.name }}"
+                        class="img-fluid"
+                        style="max-height: 350px; object-fit: contain;"
+                    >
+
+                {% else %}
+
+                    <i class="bi bi-image display-1 text-muted"></i>
+
+                {% endif %}
+
+            </div>
+
+            <!-- DATOS PRINCIPALES -->
+            <div class="col-md-7">
+
+                <span class="badge bg-dark mb-3">
+                    #{{ pokemon.id|stringformat:"03d" }}
+                </span>
+
+                <h1 class="fw-bold text-capitalize">
+                    {{ pokemon.name }}
+                </h1>
+
+                <h5 class="text-muted mb-3">
+                    Información general del Pokémon
+                </h5>
+
+                <!-- TIPOS -->
+                <h6 class="fw-bold">Tipos</h6>
+
+                <div class="pokemon-types justify-content-start mb-4">
+
+                    {% for tipo in pokemon.types %}
+                        <span class="pokemon-type tipo-{{ tipo.type.name }}">
+                            {{ tipo.type.name }}
+                        </span>
+                    {% endfor %}
+
+                </div>
+
+                <!-- ALTURA Y PESO -->
+                <div class="row g-3">
+
+                    <div class="col-sm-6">
+                        <div class="card-custom p-3 text-center">
+                            <i class="bi bi-rulers fs-3 text-danger"></i>
+                            <h6 class="mt-2 text-muted">Altura</h6>
+                            <h5 class="fw-bold">
+                                {{ pokemon.height_m }} m
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="card-custom p-3 text-center">
+                            <i class="bi bi-speedometer2 fs-3 text-primary"></i>
+                            <h6 class="mt-2 text-muted">Peso</h6>
+                            <h5 class="fw-bold">
+                                {{ pokemon.weight_kg }} kg
+                            </h5>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-3">
+                    <span class="text-muted">Experiencia base:</span>
+                    <strong>{{ pokemon.base_experience|default:"No disponible" }}</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- HABILIDADES -->
+    <div class="card-custom p-4 mb-4">
+
+        <h4 class="fw-bold mb-3">
+            <i class="bi bi-stars text-warning me-2"></i>
+            Habilidades
+        </h4>
+
+        <div class="row g-3">
+
+            {% for habilidad in pokemon.abilities %}
+
+                <div class="col-md-4">
+
+                    <div class="p-3 rounded bg-light">
+
+                        <h6 class="fw-bold text-capitalize mb-1">
+                            {{ habilidad.ability.name }}
+                        </h6>
+
+                        {% if habilidad.is_hidden %}
+                            <span class="badge bg-warning text-dark">
+                                Habilidad oculta
+                            </span>
+                        {% else %}
+                            <span class="badge bg-success">
+                                Habilidad normal
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <p class="text-muted">No hay habilidades disponibles.</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="card-custom p-4 mb-4">
+
+        <h4 class="fw-bold mb-4">
+            <i class="bi bi-bar-chart-fill text-danger me-2"></i>
+            Estadísticas
+        </h4>
+
+        {% for estadistica in pokemon.stats %}
+
+            <div class="mb-3">
+
+                <div class="d-flex justify-content-between mb-1">
+
+                    <span class="fw-semibold text-capitalize">
+                        {{ estadistica.stat.name }}
+                    </span>
+
+                    <strong>
+                        {{ estadistica.base_stat }}
+                    </strong>
+
+                </div>
+
+                <div class="progress" style="height: 12px; border-radius: 10px;">
+
+                    <div
+                        class="progress-bar bg-danger"
+                        role="progressbar"
+                        style="width: {{ estadistica.base_stat }}%;"
+                        aria-valuenow="{{ estadistica.base_stat }}"
+                        aria-valuemin="0"
+                        aria-valuemax="255"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- MOVIMIENTOS -->
+    <div class="card-custom p-4 mb-4">
+
+        <h4 class="fw-bold mb-3">
+            <i class="bi bi-lightning-fill text-warning me-2"></i>
+            Movimientos
+        </h4>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            {% for movimiento in pokemon.moves|slice:":12" %}
+
+                <span class="badge bg-secondary p-2 text-capitalize">
+                    {{ movimiento.move.name }}
+                </span>
+
+            {% empty %}
+
+                <p class="text-muted">
+                    No hay movimientos disponibles.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+        <small class="text-muted d-block mt-3">
+            Se muestran hasta 12 movimientos de este Pokémon.
+        </small>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,582 @@
+
+/* =========================================
+   POKEDEX - REGISTRO DE ENTRENADORES
+========================================= */
+
+:root {
+    --pokedex-red: #e63946;
+    --pokedex-red-dark: #bd2634;
+    --pokedex-blue: #162b45;
+    --pokedex-blue-light: #244568;
+    --pokedex-dark: #101923;
+    --pokedex-panel: #192735;
+    --pokedex-card: #223447;
+    --pokedex-yellow: #ffcb05;
+    --pokedex-white: #f4f7fb;
+    --pokedex-gray: #aab7c4;
+}
+
+/* FONDO PRINCIPAL */
+
+.registro-container {
+    max-width: 1150px;
+    margin: 35px auto;
+    padding: 25px;
+    color: var(--pokedex-white);
+}
+
+/* =========================================
+   ENCABEZADO
+========================================= */
+
+.registro-header {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #172c43, #274d70);
+    border: 1px solid #42617e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+}
+
+.registro-header::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: 80px;
+    top: -150px;
+    border: 35px solid rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.registro-header::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    right: -80px;
+    bottom: -130px;
+    border: 25px solid rgba(255, 255, 255, 0.04);
+    border-radius: 50%;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: var(--pokedex-red);
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding: 8px 14px;
+    border-radius: 5px;
+}
+
+.registro-header h1 {
+    color: white;
+    font-size: 34px;
+    font-weight: 900;
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.registro-header p {
+    color: #c5d5e5;
+    font-size: 14px;
+    margin: 0;
+}
+
+.pokeball-icon {
+    position: relative;
+    z-index: 1;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom,
+        #e63946 0%,
+        #e63946 46%,
+        #172c43 46%,
+        #172c43 54%,
+        #f4f7fb 54%,
+        #f4f7fb 100%
+    );
+    border: 7px solid #101923;
+    font-size: 0;
+    box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.15);
+}
+
+.pokeball-icon::after {
+    content: "";
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    background: white;
+    border: 7px solid #101923;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* =========================================
+   SECCIONES DEL FORMULARIO
+========================================= */
+
+.registro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-section {
+    background: var(--pokedex-panel);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #34485c;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #35485b;
+}
+
+.section-number {
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--pokedex-red);
+    color: white;
+    border-radius: 10px;
+    font-weight: 900;
+    box-shadow: 0 4px 12px #e6394640;
+}
+
+.section-title h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.section-title p {
+    color: var(--pokedex-gray);
+    font-size: 13px;
+    margin: 0;
+}
+.form-group input:focus,
+.buscador-container input:focus {
+    border-color: var(--pokedex-red);
+    box-shadow: 0 0 0 3px #e6394625;
+    background: #0d1620; /* Un fondo un poco más oscuro para que el texto blanco resalte más */
+    color: #ffffff;      /* Asegura que el texto sea blanco puro */
+}
+
+/* También asegúrate de que el color del texto por defecto sea correcto */
+.form-group input,
+.buscador-container input {
+    color: #ffffff;
+}
+
+/* =========================================
+   CAMPOS DEL FORMULARIO
+========================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    color: #dce6f0;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #111d29;
+    color: white;
+    border: 1px solid #3b5065;
+    padding: 14px 15px;
+    border-radius: 9px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.form-group input::placeholder {
+    color: #718397;
+}
+
+.form-group input:focus {
+    border-color: var(--pokedex-red);
+    box-shadow: 0 0 0 3px #e6394625;
+    background: #142333;
+}
+
+.field-error,
+.error-message {
+    color: #ff737d;
+    font-size: 12px;
+}
+
+/* =========================================
+   BUSCADOR POKEMON
+========================================= */
+
+.buscador-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.buscador-container input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px 18px;
+    background: #111d29;
+    color: white;
+    border: 1px solid #3b5065;
+    border-radius: 9px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.buscador-container input::placeholder {
+    color: #8292a3;
+}
+
+.buscador-container input:focus {
+    border-color: var(--pokedex-red);
+    box-shadow: 0 0 0 3px #e6394625;
+}
+
+.buscador-container button {
+    padding: 0 25px;
+    border: none;
+    border-radius: 9px;
+    background: var(--pokedex-red);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buscador-container button:hover {
+    background: var(--pokedex-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px #e6394640;
+}
+
+.mensaje-busqueda {
+    color: var(--pokedex-gray);
+    font-size: 13px;
+    margin: 15px 0 20px;
+}
+
+/* =========================================
+   TARJETAS DE RESULTADOS
+========================================= */
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 18px;
+}
+
+.pokemon-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--pokedex-card);
+    border: 1px solid #3a5269;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.pokemon-card::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.035);
+    border-radius: 50%;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.pokemon-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--pokedex-red);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-card img {
+    position: relative;
+    width: 125px;
+    height: 125px;
+    object-fit: contain;
+    transition: 0.3s;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+.pokemon-card:hover img {
+    transform: scale(1.1);
+}
+
+.pokemon-card h3 {
+    color: white;
+    text-transform: capitalize;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 10px 0;
+}
+
+.pokemon-card p {
+    color: #b8c9d9;
+    font-size: 12px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.pokemon-card button {
+    width: 100%;
+    padding: 11px;
+    background: var(--pokedex-red);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pokemon-card button:hover {
+    background: var(--pokedex-red-dark);
+}
+
+.pokemon-card button.agregado {
+    background: #247a58;
+    color: white;
+}
+
+/* =========================================
+   POKEMON SELECCIONADOS
+========================================= */
+
+.seleccion-container {
+    margin-top: 35px;
+    padding: 22px;
+    background: #111d29;
+    border: 1px solid #34485c;
+    border-radius: 13px;
+}
+
+.seleccion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.seleccion-header h3 {
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.seleccion-header span {
+    background: var(--pokedex-red);
+    color: white;
+    padding: 8px 13px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.seleccion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 13px;
+}
+
+.pokemon-seleccionado {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--pokedex-card);
+    padding: 11px;
+    border: 1px solid #3a5269;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.pokemon-seleccionado:hover {
+    border-color: var(--pokedex-red);
+}
+
+.pokemon-seleccionado img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.pokemon-seleccionado div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 4px;
+}
+
+.pokemon-seleccionado strong {
+    color: white;
+    text-transform: capitalize;
+    font-size: 13px;
+}
+
+.pokemon-seleccionado small {
+    color: #aab7c4;
+    text-transform: capitalize;
+    font-size: 11px;
+}
+
+.pokemon-seleccionado button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: #e6394625;
+    color: #ff737d;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pokemon-seleccionado button:hover {
+    background: var(--pokedex-red);
+    color: white;
+}
+
+.seleccion-vacia {
+    color: #8292a3;
+    font-size: 13px;
+}
+
+/* =========================================
+   BOTONES FINALES
+========================================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 13px;
+    margin-bottom: 30px;
+}
+
+.btn-cancelar,
+.btn-registrar {
+    padding: 14px 24px;
+    border-radius: 9px;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancelar {
+    background: #26394b;
+    border: 1px solid #40566b;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background: #354c62;
+    color: white;
+}
+
+.btn-registrar {
+    background: var(--pokedex-red);
+    color: white;
+    border: none;
+}
+
+.btn-registrar:hover {
+    background: var(--pokedex-red-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px #e6394650;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .registro-container {
+        padding: 12px;
+    }
+
+    .registro-header {
+        padding: 25px;
+    }
+
+    .registro-header h1 {
+        font-size: 25px;
+    }
+
+    .pokeball-icon {
+        display: none;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .buscador-container {
+        flex-direction: column;
+    }
+
+    .buscador-container button {
+        padding: 14px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions a,
+    .form-actions button {
+        text-align: center;
+    }
+}

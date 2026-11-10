@@ -1,0 +1,336 @@
+
+{% extends 'pokedex/base.html' %}
+{% load static %}
+
+{% block title %}Gimnasios | Pokédex{% endblock %}
+{% block page_heading %}Gimnasios Pokémon{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pokedex/gimnasios.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="gimnasios-page">
+
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header class="gym-hero">
+
+        <div class="gym-hero-content">
+
+            <span class="gym-section-tag">
+                <i class="bi bi-stars"></i>
+                POKÉMON GYM DATABASE
+            </span>
+
+            <h1>Gimnasios Pokémon</h1>
+
+            <p>
+                Explora los gimnasios Pokémon, conoce a sus líderes,
+                descubre sus especialidades y colecciona sus medallas.
+            </p>
+
+            <br>
+
+            <a href="{% url 'agregar_gimnasio' %}" class="btn-nuevo-entrenador">
+                <i class="bi bi-plus-circle-fill"></i>
+                Registrar gimnasio
+            </a>
+
+        </div>
+
+        <div class="gym-hero-decoration">
+            <i class="bi bi-trophy-fill"></i>
+        </div>
+
+    </header>
+
+
+    <!-- ESTADÍSTICAS -->
+    <section class="gym-stats">
+
+        <div class="gym-stat-card">
+            <div class="gym-stat-icon gym-red">
+                <i class="bi bi-building"></i>
+            </div>
+
+            <div>
+                <span>Total de gimnasios</span>
+                <h2>{{ gimnasios|length }}</h2>
+            </div>
+        </div>
+
+
+        <div class="gym-stat-card">
+            <div class="gym-stat-icon gym-blue">
+                <i class="bi bi-person-badge-fill"></i>
+            </div>
+
+            <div>
+                <span>Líderes registrados</span>
+                <h2>{{ gimnasios|length }}</h2>
+            </div>
+        </div>
+
+
+        <div class="gym-stat-card">
+            <div class="gym-stat-icon gym-yellow">
+                <i class="bi bi-award-fill"></i>
+            </div>
+
+            <div>
+                <span>Desafíos Pokémon</span>
+                <h2>Gimnasios</h2>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- BUSCADOR -->
+    <section class="gym-toolbar">
+
+        <div class="gym-toolbar-title">
+
+            <span class="gym-section-tag">COMUNIDAD</span>
+
+            <h2>Explorar gimnasios</h2>
+
+            <p>
+                Busca gimnasios por su líder, ciudad, región o tipo elemental.
+            </p>
+
+        </div>
+
+
+        <form method="GET" class="gym-search">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                name="buscar"
+                placeholder="Líder, ciudad, región o tipo..."
+                value="{{ buscar|default:'' }}"
+            >
+
+            {% if buscar %}
+                <a href="{% url 'gimnasios' %}" class="gym-clear-search">
+                    <i class="bi bi-x-circle-fill"></i>
+                </a>
+            {% endif %}
+
+            <button type="submit">
+                Buscar
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ENCABEZADO DE RESULTADOS -->
+    <div class="gym-results-heading">
+
+        <div>
+            <h3>Directorio de gimnasios</h3>
+            <p>Conoce los centros de entrenamiento Pokémon</p>
+        </div>
+
+        <span class="gym-results-counter">
+            <i class="bi bi-building-check"></i>
+            {{ gimnasios|length }} resultados
+        </span>
+
+    </div>
+
+
+    <!-- LISTADO DE GIMNASIOS -->
+    {% if gimnasios %}
+
+        <section class="gyms-grid">
+
+            {% for gimnasio in gimnasios %}
+
+                <article class="gym-card">
+
+                    <!-- PARTE SUPERIOR -->
+                    <div class="gym-card-header">
+
+                        <span class="gym-card-number">
+                            GIMNASIO #{{ forloop.counter }}
+                        </span>
+
+                        <div class="gym-badge-icon">
+                            <i class="bi bi-trophy-fill"></i>
+                        </div>
+
+                        <div class="gym-card-title">
+
+                            <h3>{{ gimnasio.lider_gimnasio }}</h3>
+
+                            <span>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                {{ gimnasio.ciudad|default:"Ciudad desconocida" }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMACIÓN -->
+                    <div class="gym-card-body">
+
+                        <div class="gym-element-type">
+
+                            <span class="gym-info-label">
+                                ESPECIALIDAD DEL GIMNASIO
+                            </span>
+
+                            <div class="gym-type-value">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                                {{ gimnasio.tipo_elemento }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="gym-info-grid">
+
+                            <div class="gym-info-item">
+                                <i class="bi bi-award-fill"></i>
+
+                                <div>
+                                    <small>Medalla</small>
+                                    <strong>
+                                        {{ gimnasio.medalla|default:"Sin medalla" }}
+                                    </strong>
+                                </div>
+                            </div>
+
+
+                            <div class="gym-info-item">
+                                <i class="bi bi-geo-alt-fill"></i>
+
+                                <div>
+                                    <small>Región</small>
+                                    <strong>
+                                        {{ gimnasio.region|default:"No especificada" }}
+                                    </strong>
+                                </div>
+                            </div>
+
+
+                            <div class="gym-info-item gym-phone-item">
+                                <i class="bi bi-telephone-fill"></i>
+
+                                <div>
+                                    <small>Teléfono</small>
+                                    <strong>
+                                        {{ gimnasio.telefono|default:"No disponible" }}
+                                    </strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PIE DE TARJETA -->
+                    <footer class="gym-card-footer">
+
+                        <span>
+                            <i class="bi bi-shield-check"></i>
+                            Gimnasio registrado
+                        </span>
+
+                        <span class="gym-status">
+                            <i class="bi bi-circle-fill"></i>
+                            Disponible
+                        </span>
+
+                    </footer>
+
+
+                    <!-- BOTONES CRUD -->
+                    <div class="gym-card-actions">
+
+                        <a
+                            href="{% url 'detalle_gimnasio' gimnasio.id %}"
+                            class="gym-btn gym-btn-detail"
+                            title="Ver detalles"
+                        >
+                            <i class="bi bi-eye-fill"></i>
+                            Detalles
+                        </a>
+
+                        <a
+                            href="{% url 'editar_gimnasio' gimnasio.id %}"
+                            class="gym-btn gym-btn-edit"
+                            title="Editar gimnasio"
+                        >
+                            <i class="bi bi-pencil-square"></i>
+                            Editar
+                        </a>
+
+                        <a
+                            href="{% url 'eliminar_gimnasio' gimnasio.id %}"
+                            class="gym-btn gym-btn-delete"
+                            title="Eliminar gimnasio"
+                        >
+                            <i class="bi bi-trash3-fill"></i>
+                            Eliminar
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+
+    {% else %}
+
+        <!-- ESTADO VACÍO -->
+        <div class="gyms-empty">
+
+            <div class="gym-empty-icon">
+                <i class="bi bi-building-exclamation"></i>
+            </div>
+
+            {% if buscar %}
+
+                <h3>No encontramos gimnasios</h3>
+
+                <p>
+                    No hay gimnasios que coincidan con "{{ buscar }}".
+                    Intenta buscar con otro nombre, ciudad o tipo elemental.
+                </p>
+
+                <a href="{% url 'gimnasios' %}">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    Mostrar todos
+                </a>
+
+            {% else %}
+
+                <h3>Aún no hay gimnasios registrados</h3>
+
+                <p>
+                    Todavía no hay gimnasios en la Pokédex.
+                    Cuando se registren, aparecerán en este directorio.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
